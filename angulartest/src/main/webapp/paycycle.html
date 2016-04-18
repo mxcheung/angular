@@ -1,50 +1,276 @@
-<!DOCTYPE HTML>
-<html ng-app="helloworldApp">
-<head>
-  <title>Hello Angular.JS</title>
-  <script src="lib/angular-1.0.8/angular.js"></script>
-  <script src="js/helloworld/app.js"></script>
-  <script src="js/helloworld/controllerspay.js"></script>
-</head>
-<body>
-  <div ng-controller="PayCycleCtrl">
-    <h1>Hello World!</h1>
-    <h2>Books</h2>
-    <p>
-      <input type="text" ng-model="booksTitleContains"></input>
-      <button ng-click="booksTitleContains = null">Clear</button>
-    </p>
-    <p>Sort by:
-      <select ng-model="booksSortedBy">
-        <option value="title-ascending">Title: Ascending</option>
-        <option value="title-descending">Title: Descending</option>
-        <option value="price-ascending">Price: Low to High</option>
-        <option value="price-descending">Price: High to Low</option>
-      </select>
-    </p>
-    <table>
-      <thead>
-        <th>Title</th>
-        <th>Price</th>
-      </thead>
-      <tbody>
-         <tr ng-repeat="book in books">
-          <td ng-bind="book.title"></td>
-          <td>{{ book.price | currency }}</td>
-        </tr>
-         <tr ng-repeat="paycycleType in paycycleTypes">
-          <td ng-bind="paycycleType.label"></td>
-          <td>{{ paycycleType.code }}</td>
-        </tr>
+<div id="paycycle" class="page page-filter clearfix paycycle container-fluid">
 
-         <tr ng-repeat="availableSchedule in availableSchedules">
-          <td ng-bind="availableSchedule.label"></td>
-          <td>{{ availableSchedule.code }}</td>
-        </tr>
-        
-        
-      </tbody>
-    </table>
-  </div>
-</body>
-</html>
+    <form role="form" name="paycycle.paycycleForm" novalidate>
+
+        <div class="row">
+
+            <div class="col-xs-12 panel-section-msg">
+                We need to know how to set the contribution Start and End Dates:
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="panel-content">
+
+                <div class="panel-section">
+
+                    <div class="row">
+                            <div class="col-xs-1 paycycle__option-col">
+                                <div class="radio standalone">
+                                    <label class="ui-radio">
+                                        <input name="choiceScheduleSelection" ng-model="paycycle.datesOption" value="predefined" type="radio"><span></span>
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-11 paycycle__value-col">
+                                <div class="form-group paycycle__options-dropdown">
+
+                                    <div class="input-group multiselect-parent">
+                                        <div class="form-control">
+                                            <div class="button-wrapper">
+
+                                                <button type="button" class="form-control dropdown"
+                                                        ng-model="paycycle.selectedPaycycleType"
+                                                        id="paycycleType"
+                                                        name="paycycleType"
+                                                        placeholder="Select Pay Cycle"
+                                                        options="paycycle.paycycleTypes"
+                                                        extra-settings="paycycle.selectSettingsSingle"
+                                                        multi-select-element>
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                        <span class="input-group-icon"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="paycycle__options paycycle__options--short" ng-if="paycycle.selectedPaycycleType && paycycle.datesOption == 'predefined'">
+                                    <button type="button" class="btn btn-line-primary"
+                                            ng-click="paycycle.setSelection('previous')"
+                                            ng-class="{'btn-selected': paycycle.selectedItem === 'previous'}">Previous Pay Cycle</button>
+                                    <button type="button" class="btn btn-line-primary"
+                                            ng-click="paycycle.setSelection('current')"
+                                            ng-class="{'btn-selected': paycycle.selectedItem === 'current'}">Current Pay Cycle</button>
+                                    <div class="paycycle__default-label" ng-if="paycycle.selectedItem != ''">
+                                        {{paycycle.selectedItem | capitalize}} Pay Cycle selected.
+                                        <span ng-if="paycycle.selectedItem === 'previous'">Start date is <strong>14 Nov 2014</strong>, number is <strong>37</strong>, frequency is <strong>weekly.</strong></span>
+                                        <span ng-if="paycycle.selectedItem === 'current'">Start date is <strong>21 Nov 2014</strong>, number is <strong>38</strong>, frequency is <strong>weekly.</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-1 paycycle__option-col">
+                            <div class="radio standalone">
+                                <label class="ui-radio">
+                                    <input name="choiceScheduleSelection" ng-model="paycycle.datesOption" value="specific" type="radio"><span></span>
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-11 paycycle__value-col">
+                            <div class="row">
+                            <div class="col-md-2 col-sm-6 col-xs-12">
+                                <label class="value-col__label">Use specific dates</label>
+                            </div>
+			                            <div class="col-md-3 col-sm-6 col-xs-12">
+				                            <div class="form-group ui-datepicker" ng-controller="DatepickerCtrl">
+				                                <label class="control-label">Period Start</label>
+				                                <div class="input-group">
+				                                    <span class="input-group-addon btn" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+				                                    <input type="text"
+				                                           date-fix
+				                                           class="form-control datepicker"
+				                                           name="fromDate"
+				                                           id="fromDate"
+				                                           datepicker-popup="dd MMM yyyy"
+				                                           show-button-bar="false"
+				                                           ng-model="paycycle.fromDate"
+				                                           is-open="opened"
+				                                           min="minDate"
+				                                           max=""
+				                                           show-weeks="showWeeks"
+				
+				                                           datepicker-options="dateOptions"
+				                                           date-disabled="disabled(date, mode)"
+				                                           close-text="Close">
+				                                </div>
+				                            </div>
+				                        </div>
+                        
+                        
+				                        <div class="col-md-3 col-sm-6 col-xs-12">
+				                            <div class="form-group ui-datepicker" ng-controller="DatepickerCtrl">
+				                                <label class="control-label">Period End</label>
+				                                <div class="input-group">
+				                                    <span class="input-group-addon btn" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+				                                    <input type="text"
+				                                           date-fix
+				                                           class="form-control datepicker"
+				                                           name="endDate"
+				                                           id="endDate"
+				                                           datepicker-popup="dd MMM yyyy"
+				                                           show-button-bar="false"
+				                                           ng-model="paycycle.endDate"
+				                                           is-open="opened"
+				                                           min="minDate"
+				                                           max=""
+				                                           show-weeks="showWeeks"
+				
+				                                           datepicker-options="dateOptions"
+				                                           date-disabled="disabled(date, mode)"
+				                                           close-text="Close">
+				                                </div>
+				                            </div>
+				                        </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-1 paycycle__option-col">
+                            <div class="radio standalone">
+                                <label class="ui-radio">
+                                    <input name="choiceScheduleSelection" ng-model="paycycle.datesOption" value="file" type="radio"><span></span>
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-11 paycycle__value-col">
+                            <label class="value-col__label">Use dates in File</label>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" ng-if="paycycle.action == 'uploadFile'">
+
+            <div class="panel-content">
+
+                <div class="panel-section">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <div class="fileupload">
+                                <span class="fileupload__select">
+                                    <input type="file" title="Select File to upload" ng-disabled="!paycycle.default && !paycycle.choice" data-ui-file-upload class="btn btn-primary">
+                                    <span class="space"></span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" ng-if="paycycle.action == 'selectFromPrevious'">
+
+            <div class="col-xs-12 panel-section-msg">
+                Select one of the previous contribution files below and then click 'Next' to proceed.
+            </div>
+
+        </div>
+
+        <div class="row" ng-if="paycycle.action == 'selectFromPrevious'">
+
+            <div class="panel-content">
+
+                <div class="panel-section">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1">Select</th>
+                                        <th class="col-md-3">Uploaded Date</th>
+                                        <th class="col-md-8">File Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="contribution in paycycle.contributionHistoryPageItems track by $index">
+                                    <td>
+                                        <div class="radio standalone">
+                                            <label class="ui-radio">
+                                                <input ng-model="paycycle.selectedContribution" name="selectedContribution" value="{{contribution.pvsDataFileId}}" type="radio">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>{{contribution.whenCreated | date : 'EEEE, d MMM yyyy'}}</td>
+                                    <td>{{contribution.fileName}}&nbsp;</td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+                            <pagination total-items="paycycle.contributionHistory.dataFiles.length"
+                                        page="paycycle.currentPage"
+                                        boundary-links="true"
+                                        items-per-page="paycycle.itemsPerPage"
+                                        max-size="5"
+                                        previous-text="&nbsp;&lsaquo;&nbsp;"
+                                        next-text="&nbsp;&rsaquo;&nbsp;"
+                                        first-text="&nbsp;&laquo;&nbsp;"
+                                        last-text="&nbsp;&raquo;&nbsp;"
+                                        on-select-page="paycycle.selectedPageChanged(page)"
+                                        class="duallist__pagination"></pagination>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" ng-if="paycycle.selectedContribution.length > 0">
+
+            <div class="panel-content">
+
+                <div class="panel-section">
+
+                    <div class="row">
+                        <div class="col-xs-12 form-inline">
+                            <div class="form-group">
+
+                                <label for="newFileName">Edit Filename (if required)</label>
+                                <input type="text" class="form-control paycycle__newfilename"
+                                       ng-model="paycycle.contributionFilename()"
+                                       ng-model-options="{ getterSetter: true }"
+                                       id="newFileName" placeholder="Enter a new filename">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+
