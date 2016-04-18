@@ -1,0 +1,1395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>AngularJS Hello World</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="AngularJS Hello World"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-10-09 17:31:13 EDT"/>
+<meta name="author" content="Rudolf Olah"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">AngularJS Hello World</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Before We Begin</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Requirements</a></li>
+<li><a href="#sec-1-2">1.2 Install and Set Up</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1 Project Structure</a></li>
+<li><a href="#sec-1-2-2">1.2.2 Install AngularJS</a></li>
+<li><a href="#sec-1-2-3">1.2.3 Install the Karma test runner and Jasmine test framework</a></li>
+<li><a href="#sec-1-2-4">1.2.4 Setting up Karma for Unit Testing</a></li>
+<li><a href="#sec-1-2-5">1.2.5 Running the Karma Unit Tests</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Learning AngularJS</a>
+<ul>
+<li><a href="#sec-2-1">2.1 Concepts</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1 Directives</a></li>
+<li><a href="#sec-2-1-2">2.1.2 Controllers</a></li>
+<li><a href="#sec-2-1-3">2.1.3 Expressions</a></li>
+<li><a href="#sec-2-1-4">2.1.4 Filters</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2 Defining the Hello World module</a></li>
+<li><a href="#sec-2-3">2.3 Using the Hello World module</a></li>
+<li><a href="#sec-2-4">2.4 Defining a Controller</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1 Sorting and Searching the Books</a></li>
+<li><a href="#sec-2-4-2">2.4.2 Putting it all together</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-5">2.5 Using the Controller</a>
+<ul>
+<li><a href="#sec-2-5-1">2.5.1 Displaying the books</a></li>
+<li><a href="#sec-2-5-2">2.5.2 Sorting the books</a></li>
+<li><a href="#sec-2-5-3">2.5.3 Searching the books</a></li>
+<li><a href="#sec-2-5-4">2.5.4 Putting it all together</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">2.6 Unit Testing the Controller</a>
+<ul>
+<li><a href="#sec-2-6-1">2.6.1 Setup Before Each Test</a></li>
+<li><a href="#sec-2-6-2">2.6.2 Test to Make Sure the Controller Exists</a></li>
+<li><a href="#sec-2-6-3">2.6.3 Tests for Book Sorting</a></li>
+<li><a href="#sec-2-6-4">2.6.4 Tests for Book Searching</a></li>
+<li><a href="#sec-2-6-5">2.6.5 Putting it all together</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-7">2.7 Defining a Directive</a></li>
+<li><a href="#sec-2-8">2.8 Unit Testing the Directive</a></li>
+<li><a href="#sec-2-9">2.9 End to End Testing</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 Putting it all together</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Before We Begin</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Requirements</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<p>
+Our hello world project has the following requirements:
+</p>
+<ul>
+<li><a href="http://nodejs.org/">Node.js</a> and <a href="https://npmjs.org/">NPM (Node Package Manager)</a>
+</li>
+<li><a href="http://angularjs.org/">AngularJS</a>
+</li>
+<li><a href="http://karma-runner.github.io/">Karma</a> test runner
+</li>
+<li><a href="http://pivotal.github.io/jasmine/">Jasmine</a> unit test framework
+</li>
+</ul>
+
+
+<p>
+Note: Node.js is only used for running Karma and Jasmine.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Install and Set Up</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Project Structure</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+<p>AngularJS doesn't impose any particular project structure on you.
+</p>
+<p>
+For this tutorial, the following project structure is used:
+</p><ul>
+<li>lib/
+</li>
+<li>images/
+</li>
+<li>js/
+<ul>
+<li>helloworld/
+</li>
+</ul>
+
+</li>
+<li>styles/
+</li>
+<li>tests/
+</li>
+</ul>
+
+
+<p>
+JavaScript source code is in <code>js/</code>, the CSS is in <code>styles/</code> and any
+images go into <code>images/</code>. Test code is in <code>tests/</code>. The <code>lib/</code>
+directory is where JavaScript and CSS libraries are placed so that we
+don't get confused between our code and external code that others have
+written.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Install AngularJS</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+<p>Download <a href="http://www.angularjs.org/">AngularJS</a> and place it in the <code>lib/</code> directory.
+</p>
+
+
+
+<pre class="example">&lt;script src="lib/angular-1.0.8/angular.js"&gt;&lt;/script&gt;
+&lt;script src="js/helloworld/app.js"&gt;&lt;/script&gt;
+&lt;script src="js/helloworld/controllers.js"&gt;&lt;/script&gt;
+</pre>
+
+
+
+<pre class="example">&lt;link rel="stylesheet" href="styles/helloworld.css" /&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Install the Karma test runner and Jasmine test framework</h4>
+<div class="outline-text-4" id="text-1-2-3">
+
+<p>We create a <code>package.json</code> so that we can list the dependencies of our
+project which lets us use <code>npm</code> to automatically install them.
+</p>
+
+
+
+<pre class="example">{
+  "name": "learning-angularjs",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "karma": "0.10.2",
+    "karma-firefox-launcher": "0.1.0",
+    "karma-jasmine": "0.1.3"
+  }
+}
+</pre>
+
+
+<p>
+<a href="http://karma-runner.github.io/">Karma</a> is a test runner and it uses the <a href="http://pivotal.github.io/jasmine/">Jasmine</a> test framework. Karma
+lets us run unit tests and end to end tests. The Jasmine test
+framework gives us functions for unit testing.
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Setting up Karma for Unit Testing</h4>
+<div class="outline-text-4" id="text-1-2-4">
+
+<p>Before we can get to unit testing the controller, we have to create
+configuration file for Karma.
+</p>
+<p>
+We want to set Karma to use Jasmine as our test framework:
+</p>
+
+
+
+<pre class="example">'frameworks': [
+  'jasmine'
+]
+</pre>
+
+
+<p>
+And we also want to be able to run the tests within the Firefox and
+Chrome browsers if they're available:
+</p>
+
+
+
+<pre class="example">'browsers': [
+  'Chrome',
+  'Firefox'
+]
+</pre>
+
+
+<p>
+We want Karma to watch all of our library, source and unit-test files
+and to reload them when they're updated. The order of the files is
+important and determines the order they're loaded in. You will want
+the AngularJS library to load first, followed by the source code, and
+then finally the unit-test files.
+</p>
+
+
+
+<pre class="example">'files': [
+  // Angular files
+  'lib/angular-1.0.8/angular.js',
+  'lib/angular-1.0.8/angular-*.js',
+
+  // Hello World source code
+  'js/helloworld/app.js',
+  'js/helloworld/controllers.js',
+
+  // Hello World test files
+  'tests/*.js'
+]
+</pre>
+
+
+<p>
+We also need to exclude the angular scenario source file. It's used
+for end-to-end/integration testing and isn't needed for our unit
+tests:
+</p>
+
+
+
+<pre class="example">'exclude': [
+  'lib/angular-1.0.8/angular-scenario.js'
+]
+</pre>
+
+
+<p>
+Here's how it looks put together:
+</p>
+
+
+
+<pre class="example">module.exports = function (config) {
+  config.set({
+    'frameworks': [
+      'jasmine'
+    ],
+    'browsers': [
+      'Chrome',
+      'Firefox'
+    ],
+    'files': [
+      // Angular files
+      'lib/angular-1.0.8/angular.js',
+      'lib/angular-1.0.8/angular-*.js',
+
+      // Hello World source code
+      'js/helloworld/app.js',
+      'js/helloworld/controllers.js',
+
+      // Hello World test files
+      'tests/*.js'
+    ],
+    'exclude': [
+      'lib/angular-1.0.8/angular-scenario.js'
+    ]
+  });
+};
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Running the Karma Unit Tests</h4>
+<div class="outline-text-4" id="text-1-2-5">
+
+<p>You can run the unit tests like this:
+</p>
+
+
+
+<pre class="example">./node_modules/karma/bin/karma start karma.conf.js --auto-watch
+</pre>
+
+
+<p>
+If Karma is installed globally, you can run it like this:
+</p>
+
+
+
+<pre class="example">karma start karma.conf.js --auto-watch
+</pre>
+
+
+<p>
+The <code>--auto-watch</code> option will run tests as soon as any source files
+have changed. You can add <code>autoWatch: true</code> to the karma configuration
+setup so that you don't have to add <code>--auto-watch</code> on the
+command-line.
+</p></div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Learning AngularJS</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Concepts</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+</div>
+
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Directives</h4>
+<div class="outline-text-4" id="text-2-1-1">
+
+<p>Directives are specialized reusuable HTML elements. They contain code
+for manipulating the DOM and for adding events.
+</p>
+<ul>
+<li id="sec-2-1-1-1">Example: ng-repeat<br/>
+For example, the ng-repeat directive will repeat whatever child
+elements it contains.
+
+
+
+
+<pre class="example">&lt;div ng-repeat="person in people"&gt;
+  &lt;h2&gt;{{ person.fullName }}&lt;/h2&gt;
+  &lt;p&gt;{{ person.firstName }} is {{ person.age }} years old.&lt;/p&gt;
+  &lt;p&gt;Address: {{ person.address }}&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+
+<p>
+Expands into:
+</p>
+
+
+
+<pre class="example">&lt;div ng-repeat="person in people"&gt;
+  &lt;h2&gt;Alice Example&lt;/h2&gt;
+  &lt;p&gt;Alice is 30 years old.&lt;/p&gt;
+  &lt;p&gt;Address: 1 Some St., Boston, MA, United States of America&lt;/p&gt;
+  &lt;h2&gt;Bob Sample&lt;/h2&gt;
+  &lt;p&gt;Bob is 32 years old.&lt;/p&gt;
+  &lt;p&gt;Address: 876 Another St., Toronto, ON, Canada&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-1-2">Example: ng-click<br/>
+Another example; the ng-click directive won't modify the HTML but it
+will bind a function to the click event on the element.
+
+
+
+
+<pre class="example">&lt;button ng-click="alert('hello world')"&gt;Click me&lt;/button&gt;
+</pre>
+
+
+<p>
+Expands into the same HTML but when you click, an alert will pop up that says "hello world":
+</p>
+
+
+
+<pre class="example">&lt;button ng-click="alert('hello world')"&gt;Click me&lt;/button&gt;
+</pre>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Controllers</h4>
+<div class="outline-text-4" id="text-2-1-2">
+
+<p>A controller is an object that controls what data is displayed in the
+app and how the user can interact with the app. A controller can fetch
+data from a server and put it into its scope so that the data can be
+displayed. When a user clicks on a button, the controller contains the
+function that will be executed on that click.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Expressions</h4>
+<div class="outline-text-4" id="text-2-1-3">
+
+<p>Angular expressions is code within within curly braces. You can put
+math expressions in them, refer to variables within the controller's
+scope, and run variables through filters among other things.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Filters</h4>
+<div class="outline-text-4" id="text-2-1-4">
+
+<p>Filters are functions for reformatting variables or other data that is
+passed to them. The most commonly used filters are for formatting how
+a date is displayed and for displaying a decimal number as a currency.
+</p>
+<ul>
+<li id="sec-2-1-4-1">Example: currency<br/>
+
+
+
+
+<pre class="example">{{ '25.09' | currency }}
+</pre>
+
+
+<p>
+After filtering it turns into this:
+</p>
+
+
+
+<pre class="example">$25.09
+</pre>
+
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Defining the Hello World module</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>To begin with, we must create a module that represents the whole
+app. Creating a module helps us avoid polluting the global namespace.
+</p>
+
+
+
+<pre class="example">angular.module('helloworldApp', []);
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Using the Hello World module</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<p>After defining the app's module, we can use it on our site by
+specifiying it as the value for the <code>ng-app</code> attribute in the
+top-level <code>html</code> element:
+</p>
+
+
+
+<pre class="example">&lt;html ng-app="helloworldApp"&gt;
+</pre>
+
+
+<p>
+This will give us access to any controllers, directives, services,
+filters and other objects that are part of the helloworldApp.
+</p>
+<p>
+Note: There can only be one ng-app declared on a page.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Defining a Controller</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<p>We're going to define our own controller, the HelloworldCtrl, which
+contains a list of books. Each book has a title and a price that we're
+going to display. We're going to be able to sort the books by their
+title and price and we're also going to be able to search through the
+book titles.
+</p>
+
+
+
+<pre class="example">this.books = [
+  {
+    'title': 'Mastering Web Application Development with AngularJS',
+    'price': '35.99'
+  },
+  {
+    'title': 'AngularJS for Dummies',
+    'price': '10.95'
+  },
+  {
+    'title': 'Learn AngularJS in 24 Hours',
+    'price': '29.00'
+  },
+  {
+    'title': 'Learn AngularJS in 24 Hours, 2nd Edition',
+    'price': '9.95'
+  }
+];
+
+var books = this.books;
+$scope.books = books;
+</pre>
+
+
+<p>
+Typically, this data would be fetched from a server using a REST
+API. In this tutorial, we're simplifying things and providing all the
+data to the controller that we want to work with.
+</p>
+<p>
+To make unit testing easier, we add the mock data as a property of the
+controller object. A reference to the mock data is stored so that
+there are no binding issues when using the <code>this</code> keyword (A List
+Apart has a good article on this, <a href="http://alistapart.com/article/getoutbindingsituations">"Getting Out of Binding Situations in JavaScript"</a>).
+</p>
+
+</div>
+
+<div id="outline-container-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> Sorting and Searching the Books</h4>
+<div class="outline-text-4" id="text-2-4-1">
+
+<p>The list of books can be sorted by the title or the price. Books that
+include <code>booksTitleContains</code> in their title will be visible, we're
+going to use an empty string or null to specify whether to search the
+books by title or to display all books in the list.
+</p>
+
+
+
+<pre class="example">$scope.booksSortedBy = 'title-ascending';
+$scope.booksTitleContains = '';
+</pre>
+
+
+<p>
+Then we have to sort and search the list of books so that we know what
+to display:
+</p>
+
+
+
+<pre class="example">var searchAndSortBooks = function () {
+  var i;
+  var searchTitleRegExp;
+  var result = [];
+
+  // Searching for titles containing the search string
+  if ($scope.booksTitleContains &amp;&amp; $scope.booksTitleContains != '') {
+    searchTitleRegExp = new RegExp($scope.booksTitleContains, 'i');
+    for (i = 0; i &lt; books.length; i++) {
+      if (searchTitleRegExp.test(books[i].title)) {
+        result.push(books[i]);
+      }
+    }
+  } else {
+    result = books;
+  }
+
+  // Sorting the books
+  if ($scope.booksSortedBy.match(/title/)) {
+    $scope.books.sort(function (a, b) {
+      if (a.title &lt; b.title) {
+        return -1;
+      } else if (a.title &gt; b.title) {
+        return 1;
+      }
+      return 0;
+    });
+  } else if ($scope.booksSortedBy.match(/price/)) {
+    $scope.books.sort(function (a, b) {
+      if (parseFloat(a.price) &lt; parseFloat(b.price)) {
+        return -1;
+      } else if (parseFloat(a.price) &gt; parseFloat(b.price)) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  if ($scope.booksSortedBy.match(/descending/)) {
+    $scope.books.reverse();
+  }
+
+  $scope.books = result;
+};
+
+searchAndSortBooks();
+</pre>
+
+
+<p>
+When either the <code>booksSortedBy</code> or <code>booksTitleContains</code> scope
+variables change, we trigger the function and update the list of books
+that are displayed. To do that, we use the <code>$watch</code> method in the
+<code>$scope</code> object. It will watch for changes in the given expression and
+execute whatever callback function we provide.
+</p>
+
+
+
+<pre class="example">$scope.$watch(
+  'booksSortedBy + "," + booksTitleContains',
+  function (newValue, oldValue) {
+    searchAndSortBooks();
+  }
+);
+</pre>
+
+
+<p>
+Initially, the expression that is watched will look like this:
+</p>
+
+
+
+<pre class="example">title-ascending,
+</pre>
+
+
+<p>
+When we start entering a title to search for, the expression being
+watched will change:
+</p>
+
+
+
+<pre class="example">title-ascending,simple title
+</pre>
+
+
+<p>
+When we change how we sort the books, the expression again will
+change:
+</p>
+
+
+
+<pre class="example">price-descending,my favourite book
+</pre>
+
+
+<p>
+Whenever that expression changes, the callback function that we
+provided will be executed.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> Putting it all together</h4>
+<div class="outline-text-4" id="text-2-4-2">
+
+<p>We create the controller as part of the <code>helloworldApp</code> module. We
+specify the <code>$scope</code> as a dependency and then we pass in a function
+that defines the controller.
+</p>
+
+
+
+<pre class="example">angular.module('helloworldApp').controller(
+  'HelloworldCtrl',   // name of the controller
+  [
+    '$scope',         // DI (Dependency Injection) modules
+    function ($scope) { // definition of the controller
+      this.books = [
+        {
+          'title': 'Mastering Web Application Development with AngularJS',
+          'price': '35.99'
+        },
+        {
+          'title': 'AngularJS for Dummies',
+          'price': '10.95'
+        },
+        {
+          'title': 'Learn AngularJS in 24 Hours',
+          'price': '29.00'
+        },
+        {
+          'title': 'Learn AngularJS in 24 Hours, 2nd Edition',
+          'price': '9.95'
+        }
+      ];
+
+      var books = this.books;
+      $scope.books = books;
+      $scope.booksSortedBy = 'title-ascending';
+      $scope.booksTitleContains = '';
+      var searchAndSortBooks = function () {
+        var i;
+        var searchTitleRegExp;
+        var result = [];
+
+        // Searching for titles containing the search string
+        if ($scope.booksTitleContains &amp;&amp; $scope.booksTitleContains != '') {
+          searchTitleRegExp = new RegExp($scope.booksTitleContains, 'i');
+          for (i = 0; i &lt; books.length; i++) {
+            if (searchTitleRegExp.test(books[i].title)) {
+              result.push(books[i]);
+            }
+          }
+        } else {
+          result = books;
+        }
+
+        // Sorting the books
+        if ($scope.booksSortedBy.match(/title/)) {
+          $scope.books.sort(function (a, b) {
+            if (a.title &lt; b.title) {
+              return -1;
+            } else if (a.title &gt; b.title) {
+              return 1;
+            }
+            return 0;
+          });
+        } else if ($scope.booksSortedBy.match(/price/)) {
+          $scope.books.sort(function (a, b) {
+            if (parseFloat(a.price) &lt; parseFloat(b.price)) {
+              return -1;
+            } else if (parseFloat(a.price) &gt; parseFloat(b.price)) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+
+        if ($scope.booksSortedBy.match(/descending/)) {
+          $scope.books.reverse();
+        }
+
+        $scope.books = result;
+      };
+
+      searchAndSortBooks();
+      $scope.$watch(
+        'booksSortedBy + "," + booksTitleContains',
+        function (newValue, oldValue) {
+          searchAndSortBooks();
+        }
+      );
+    }
+  ]
+);
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Using the Controller</h3>
+<div class="outline-text-3" id="text-2-5">
+
+<p>Once we have defined the controller, we can use it in our app. The
+<code>HelloworldCtrl</code> is our top-level controller.
+</p>
+
+
+
+<pre class="example">&lt;div ng-controller="HelloworldCtrl"&gt;
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> Displaying the books</h4>
+<div class="outline-text-4" id="text-2-5-1">
+
+<p>We're going to display the list of books in a table using the
+Angular's <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat</a> directive which will loop through each book. We
+can use the <a href="http://docs.angularjs.org/api/ng.directive:ngBind">ng-bind</a> directive to display the book's title or price, or
+we can use an <a href="http://docs.angularjs.org/guide/expression">Angular expression</a>. We'll use both, <code>ng-bind</code> for the
+title and an expression for the price. The price will be formatted
+using the <a href="http://docs.angularjs.org/api/ng.filter:currency">currency filter</a>.
+</p>
+
+
+
+<pre class="example">&lt;table&gt;
+  &lt;thead&gt;
+    &lt;th&gt;Title&lt;/th&gt;
+    &lt;th&gt;Price&lt;/th&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr ng-repeat="book in books"&gt;
+      &lt;td ng-bind="book.title"&gt;&lt;/td&gt;
+      &lt;td&gt;{{ book.price | currency }}&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> Sorting the books</h4>
+<div class="outline-text-4" id="text-2-5-2">
+
+<p>To sort the books, there will be a drop down menu. It contains all
+possible sorting options. When one of these options is selected, the
+variable <code>booksSortedBy</code> in the <code>HelloworldCtrl</code> controller's scope
+will be updated to whatever the value of the option is.
+</p>
+
+
+
+<pre class="example">&lt;p&gt;Sort by:
+  &lt;select ng-model="booksSortedBy"&gt;
+    &lt;option value="title-ascending"&gt;Title: Ascending&lt;/option&gt;
+    &lt;option value="title-descending"&gt;Title: Descending&lt;/option&gt;
+    &lt;option value="price-ascending"&gt;Price: Low to High&lt;/option&gt;
+    &lt;option value="price-descending"&gt;Price: High to Low&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/p&gt;
+</pre>
+
+
+<p>
+When you select "Price: High to Low", the value of
+<code>$scope.booksSortedBy</code> is "price-descending".
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-5-3" class="outline-4">
+<h4 id="sec-2-5-3"><span class="section-number-4">2.5.3</span> Searching the books</h4>
+<div class="outline-text-4" id="text-2-5-3">
+
+<p>When we enter text into the search box, the <code>booksTitleContains</code>
+variable in the scope will be set to whatever value we entered. Since
+we're watching the value, the search will automatically be executed.
+</p>
+<p>
+The clear button makes it faster to stop the search and to display all
+books.
+</p>
+
+
+
+<pre class="example">&lt;p&gt;
+  &lt;input type="text" ng-model="booksTitleContains"&gt;&lt;/input&gt;
+  &lt;button ng-click="booksTitleContains = null"&gt;Clear&lt;/button&gt;
+&lt;/p&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5-4" class="outline-4">
+<h4 id="sec-2-5-4"><span class="section-number-4">2.5.4</span> Putting it all together</h4>
+<div class="outline-text-4" id="text-2-5-4">
+
+
+<p>
+Putting it all together we get:
+</p>
+
+
+
+<pre class="example">&lt;&lt;helloworld-controller-div-html&gt;&gt;
+  &lt;h1&gt;Hello World!&lt;/h1&gt;
+  &lt;h2&gt;Books&lt;/h2&gt;
+  &lt;&lt;helloworld-controller-books-search-html&gt;&gt;
+  &lt;&lt;helloworld-controller-books-sort-html&gt;&gt;
+  &lt;&lt;helloworld-controller-books-list-html&gt;&gt;
+&lt;/div&gt;
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Unit Testing the Controller</h3>
+<div class="outline-text-3" id="text-2-6">
+
+<p>There are a few moving parts in our controller; we can sort the list
+of books, and we can search for them by title. We need to test both of
+these to make sure that they work and we can do this manually, by
+loading up the page and clicking on and off different buttons and
+visually confirming that the list of books is correct.
+</p>
+<p>
+This can quickly become tedious when you start adding many more
+controllers. So we want to automate the testing by writing some unit
+tests.
+</p>
+
+</div>
+
+<div id="outline-container-2-6-1" class="outline-4">
+<h4 id="sec-2-6-1"><span class="section-number-4">2.6.1</span> Setup Before Each Test</h4>
+<div class="outline-text-4" id="text-2-6-1">
+
+<p>Before each test we want to setup the controller:
+</p>
+
+
+
+<pre class="example">var scope;
+var ctrl;
+
+beforeEach(module('helloworldApp'));
+
+beforeEach(inject(function ($rootScope, $controller) {
+  scope = $rootScope.$new();
+  ctrl = $controller('HelloworldCtrl', { $scope: scope });
+}));
+</pre>
+
+
+<p>
+The <code>module</code> and <code>inject</code> functions are defined at the global level
+and within the <code>angular</code> object. The <a href="http://docs.angularjs.org/api/angular.mock.module">module</a> function gets the module
+prepared for testing. The <a href="http://docs.angularjs.org/api/angular.mock.inject">inject</a> function injects dependencies which
+provide the functionality required, it allows mock objects to be used
+when testing.
+</p>
+<p>
+The <code>$rootScope</code> dependency provides the function to define a new
+scope for the controller. The <code>$controller</code> dependency provides a way
+to look up and create an instance of a controller.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-6-2" class="outline-4">
+<h4 id="sec-2-6-2"><span class="section-number-4">2.6.2</span> Test to Make Sure the Controller Exists</h4>
+<div class="outline-text-4" id="text-2-6-2">
+
+<p>Here's how we test to make sure that the controller, <code>HelloworldCtrl</code>,
+exists in the module, <code>helloworldApp</code>:
+</p>
+
+
+
+<pre class="example">it('should have a HelloworldCtrl controller', function () {
+  expect(ctrl).not.toBe(null);
+});
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-6-3" class="outline-4">
+<h4 id="sec-2-6-3"><span class="section-number-4">2.6.3</span> Tests for Book Sorting</h4>
+<div class="outline-text-4" id="text-2-6-3">
+
+<p>Here's how we test the book sorting.
+</p>
+
+
+
+<pre class="example">it('sorts books by title in ascending order', function () {
+  var i;
+  scope.booksSortedBy = 'title-ascending';
+  scope.$apply();
+  for (i = 0; i &lt; scope.books.length - 1; i++) {
+    expect(scope.books[i].title).toBeLessThan(scope.books[i + 1].title);
+  }
+});
+
+it('sorts books by title in descending order', function () {
+  var i;
+  scope.booksSortedBy = 'title-descending';
+  scope.$apply();
+  for (i = 0; i &lt; scope.books.length - 1; i++) {
+    expect(scope.books[i].title).toBeGreaterThan(scope.books[i + 1].title);
+  }
+});
+
+it('sorts books by price in ascending order', function () {
+  var i;
+  scope.booksSortedBy = 'price-ascending';
+  scope.$apply();
+  for (i = 0; i &lt; scope.books.length - 1; i++) {
+    expect(parseFloat(scope.books[i].price)).toBeLessThan(parseFloat(scope.books[i + 1].price));
+  }
+});
+
+it('sorts books by price in descending order', function () {
+  var i;
+  scope.booksSortedBy = 'price-descending';
+  scope.$apply();
+  for (i = 0; i &lt; scope.books.length - 1; i++) {
+    expect(parseFloat(scope.books[i].price)).toBeGreaterThan(parseFloat(scope.books[i + 1].price));
+  }
+});
+</pre>
+
+
+<p>
+Note that after changing a scope variable, we have to call <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#$apply">the $apply method</a>. This is part of the Angular life cycle and it handles
+exceptions and then executes any <code>$watch</code> expressions that we have
+setup.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-6-4" class="outline-4">
+<h4 id="sec-2-6-4"><span class="section-number-4">2.6.4</span> Tests for Book Searching</h4>
+<div class="outline-text-4" id="text-2-6-4">
+
+<p>Here's how we test book searching:
+</p>
+
+
+
+<pre class="example">it('lists all books when searching for null or an empty string', function () {
+  scope.booksTitleContains = '';
+  scope.$apply();
+  expect(scope.books.length).toBe(ctrl.books.length);
+
+  scope.booksTitleContains = null;
+  scope.$apply();
+  expect(scope.books.length).toBe(ctrl.books.length);
+});
+
+it('lists only books that contain the search string in their title', function () {
+  scope.booksTitleContains = 'Web';
+  scope.$apply();
+  expect(scope.books.length).toBe(1);
+  expect(scope.books[0].title).toMatch('Web');
+
+  scope.booksTitleContains = 'AngularJS';
+  scope.$apply();
+  expect(scope.books.length).toBe(ctrl.books.length);
+  expect(scope.books[1].title).toMatch('AngularJS');
+
+  scope.booksTitleContains = 'Learn AngularJS';
+  scope.$apply();
+  expect(scope.books.length).toBe(2);
+  expect(scope.books[0].title).toMatch('Learn AngularJS');
+});
+</pre>
+
+
+<p>
+Note that again, after changing the $scope variable, we have to call
+$apply to go through the Angular life cycle.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-6-5" class="outline-4">
+<h4 id="sec-2-6-5"><span class="section-number-4">2.6.5</span> Putting it all together</h4>
+<div class="outline-text-4" id="text-2-6-5">
+
+
+
+
+<pre class="example">describe('Hello World Controller', function () {
+  var scope;
+  var ctrl;
+
+  beforeEach(module('helloworldApp'));
+
+  beforeEach(inject(function ($rootScope, $controller) {
+    scope = $rootScope.$new();
+    ctrl = $controller('HelloworldCtrl', { $scope: scope });
+  }));
+
+  it('should have a HelloworldCtrl controller', function () {
+    expect(ctrl).not.toBe(null);
+  });
+
+  it('sorts books by title in ascending order', function () {
+    var i;
+    scope.booksSortedBy = 'title-ascending';
+    scope.$apply();
+    for (i = 0; i &lt; scope.books.length - 1; i++) {
+      expect(scope.books[i].title).toBeLessThan(scope.books[i + 1].title);
+    }
+  });
+
+  it('sorts books by title in descending order', function () {
+    var i;
+    scope.booksSortedBy = 'title-descending';
+    scope.$apply();
+    for (i = 0; i &lt; scope.books.length - 1; i++) {
+      expect(scope.books[i].title).toBeGreaterThan(scope.books[i + 1].title);
+    }
+  });
+
+  it('sorts books by price in ascending order', function () {
+    var i;
+    scope.booksSortedBy = 'price-ascending';
+    scope.$apply();
+    for (i = 0; i &lt; scope.books.length - 1; i++) {
+      expect(parseFloat(scope.books[i].price)).toBeLessThan(parseFloat(scope.books[i + 1].price));
+    }
+  });
+
+  it('sorts books by price in descending order', function () {
+    var i;
+    scope.booksSortedBy = 'price-descending';
+    scope.$apply();
+    for (i = 0; i &lt; scope.books.length - 1; i++) {
+      expect(parseFloat(scope.books[i].price)).toBeGreaterThan(parseFloat(scope.books[i + 1].price));
+    }
+  });
+
+  it('lists all books when searching for null or an empty string', function () {
+    scope.booksTitleContains = '';
+    scope.$apply();
+    expect(scope.books.length).toBe(ctrl.books.length);
+
+    scope.booksTitleContains = null;
+    scope.$apply();
+    expect(scope.books.length).toBe(ctrl.books.length);
+  });
+
+  it('lists only books that contain the search string in their title', function () {
+    scope.booksTitleContains = 'Web';
+    scope.$apply();
+    expect(scope.books.length).toBe(1);
+    expect(scope.books[0].title).toMatch('Web');
+
+    scope.booksTitleContains = 'AngularJS';
+    scope.$apply();
+    expect(scope.books.length).toBe(ctrl.books.length);
+    expect(scope.books[1].title).toMatch('AngularJS');
+
+    scope.booksTitleContains = 'Learn AngularJS';
+    scope.$apply();
+    expect(scope.books.length).toBe(2);
+    expect(scope.books[0].title).toMatch('Learn AngularJS');
+  });
+});
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Defining a Directive</h3>
+<div class="outline-text-3" id="text-2-7">
+
+</div>
+
+</div>
+
+<div id="outline-container-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Unit Testing the Directive</h3>
+<div class="outline-text-3" id="text-2-8">
+
+</div>
+
+</div>
+
+<div id="outline-container-2-9" class="outline-3">
+<h3 id="sec-2-9"><span class="section-number-3">2.9</span> End to End Testing</h3>
+<div class="outline-text-3" id="text-2-9">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Putting it all together</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+
+<pre class="example">&lt;!DOCTYPE HTML&gt;
+&lt;html ng-app="helloworldApp"&gt;
+&lt;head&gt;
+  &lt;title&gt;Hello Angular.JS&lt;/title&gt;
+  &lt;link rel="stylesheet" href="styles/helloworld.css" /&gt;
+  &lt;script src="lib/angular-1.0.8/angular.js"&gt;&lt;/script&gt;
+  &lt;script src="js/helloworld/app.js"&gt;&lt;/script&gt;
+  &lt;script src="js/helloworld/controllers.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div ng-controller="HelloworldCtrl"&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;h2&gt;Books&lt;/h2&gt;
+    &lt;p&gt;
+      &lt;input type="text" ng-model="booksTitleContains"&gt;&lt;/input&gt;
+      &lt;button ng-click="booksTitleContains = null"&gt;Clear&lt;/button&gt;
+    &lt;/p&gt;
+    &lt;p&gt;Sort by:
+      &lt;select ng-model="booksSortedBy"&gt;
+        &lt;option value="title-ascending"&gt;Title: Ascending&lt;/option&gt;
+        &lt;option value="title-descending"&gt;Title: Descending&lt;/option&gt;
+        &lt;option value="price-ascending"&gt;Price: Low to High&lt;/option&gt;
+        &lt;option value="price-descending"&gt;Price: High to Low&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/p&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;th&gt;Title&lt;/th&gt;
+        &lt;th&gt;Price&lt;/th&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr ng-repeat="book in books"&gt;
+          &lt;td ng-bind="book.title"&gt;&lt;/td&gt;
+          &lt;td&gt;{{ book.price | currency }}&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-10-09 17:31:13 EDT</p>
+<p class="author">Author: Rudolf Olah</p>
+<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

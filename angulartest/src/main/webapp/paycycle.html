@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html ng-app="helloworldApp">
+<head>
+  <title>Hello Angular.JS</title>
+  <script src="lib/angular-1.0.8/angular.js"></script>
+  <script src="js/helloworld/app.js"></script>
+  <script src="js/helloworld/controllerspay.js"></script>
+</head>
+<body>
+  <div ng-controller="PayCycleCtrl">
+    <h1>Hello World!</h1>
+    <h2>Books</h2>
+    <p>
+      <input type="text" ng-model="booksTitleContains"></input>
+      <button ng-click="booksTitleContains = null">Clear</button>
+    </p>
+    <p>Sort by:
+      <select ng-model="booksSortedBy">
+        <option value="title-ascending">Title: Ascending</option>
+        <option value="title-descending">Title: Descending</option>
+        <option value="price-ascending">Price: Low to High</option>
+        <option value="price-descending">Price: High to Low</option>
+      </select>
+    </p>
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Price</th>
+      </thead>
+      <tbody>
+         <tr ng-repeat="book in books">
+          <td ng-bind="book.title"></td>
+          <td>{{ book.price | currency }}</td>
+        </tr>
+         <tr ng-repeat="paycycleType in paycycleTypes">
+          <td ng-bind="paycycleType.label"></td>
+          <td>{{ paycycleType.code }}</td>
+        </tr>
+
+         <tr ng-repeat="availableSchedule in availableSchedules">
+          <td ng-bind="availableSchedule.label"></td>
+          <td>{{ availableSchedule.code }}</td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
